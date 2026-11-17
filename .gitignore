@@ -39,3 +39,28 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# personal content: the real knowledge base stays out of the repository
+/knowledge/
+
+# personal branding (optional favicon set dropped into public/)
+/public/favicon.ico
+/public/favicon.svg
+/public/favicon-16x16.png
+/public/favicon-32x32.png
+/public/apple-touch-icon.png
+/public/android-chrome-192x192.png
+/public/android-chrome-512x512.png
+/public/site.webmanifest
+
+# local tooling and editors
+.claude/
+.idea/
+.vscode/
+*.log
+*.local
+
+# database dumps and backups
+*.sql
+*.dump
+*.bak

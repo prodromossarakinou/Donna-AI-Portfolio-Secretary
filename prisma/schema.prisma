@@ -1,0 +1,139 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
+}
+
+model AccessLink {
+  id           String           @id @default(cuid())
+  code         String           @unique
+  label        String
+  note         String?
+  createdAt    DateTime         @default(now())
+  expiresAt    DateTime
+  revokedAt    DateTime?
+  lastAccessAt DateTime?
+  sessions     VisitorSession[]
+  messages     ChatMessage[]
+}
+
+model VisitorSession {
+  id         String        @id @default(cuid())
+  linkId     String
+  link       AccessLink    @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  createdAt  DateTime      @default(now())
+  lastSeenAt DateTime      @default(now())
+  ip         String?
+  userAgent  String?
+  messages   ChatMessage[]
+
+  @@index([linkId])
+}
+
+model ChatMessage {
+  id           String         @id @default(cuid())
+  linkId       String
+  link         AccessLink     @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  sessionId    String
+  session      VisitorSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  createdAt    DateTime       @default(now())
+  question     String
+  answer       String
+  refused      Boolean        @default(false)
+  inputTokens  Int            @default(0)
+  outputTokens Int            @default(0)
+  costUsd      Float          @default(0)
+
+  @@index([linkId, createdAt])
+  @@index([createdAt])
+}
+
+enum IndexStatus {
+  PENDING
+  INDEXING
+  READY
+  ERROR
+}
+
+model KnowledgeDoc {
+  id          String             @id @default(cuid())
+  slug        String             @unique
+  title       String
+  content     String
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  indexStatus IndexStatus        @default(PENDING)
+  indexError  String?
+  indexedAt   DateTime?
+  source      String             @default("manual")
+  chunks      KnowledgeChunk[]
+  versions    KnowledgeVersion[]
+}
+
+model KnowledgeVersion {
+  id        String       @id @default(cuid())
+  docId     String
+  doc       KnowledgeDoc @relation(fields: [docId], references: [id], onDelete: Cascade)
+  title     String
+  content   String
+  createdAt DateTime     @default(now())
+
+  @@index([docId, createdAt])
+}
+
+model KnowledgeChunk {
+  id        String                       @id @default(cuid())
+  docId     String
+  doc       KnowledgeDoc                 @relation(fields: [docId], references: [id], onDelete: Cascade)
+  idx       Int
+  content   String
+  embedding Unsupported("vector(1536)")?
+
+  @@index([docId])
+}
+
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+model ApiUsage {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  provider     String
+  kind         String
+  source       String
+  model        String
+  inputTokens  Int      @default(0)
+  outputTokens Int      @default(0)
+  costUsd      Float    @default(0)
+  linkId       String?
+
+  @@index([createdAt])
+  @@index([provider, createdAt])
+}
+
+model Project {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  name          String
+  organization  String   @default("")
+  start         String   @default("")
+  end           String   @default("")
+  role          String   @default("")
+  summary       String   @default("")
+  contributions String[]
+  stack         String[]
+  url           String   @default("")
+  sortOrder     Int      @default(0)
+  sourceHash    String   @default("")
+  kind          String   @default("project")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

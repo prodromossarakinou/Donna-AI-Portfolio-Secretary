@@ -1,0 +1,55 @@
+name: donna
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-donna}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-donna}
+      POSTGRES_DB: ${POSTGRES_DB:-donna}
+    volumes:
+      - donna-db:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5434}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-donna} -d ${POSTGRES_DB:-donna}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build: .
+    restart: unless-stopped
+    profiles: ["prod"]
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file: .env
+    ports:
+      - "127.0.0.1:${APP_PORT:-3000}:3000"
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-donna}:${POSTGRES_PASSWORD:-donna}@db:5432/${POSTGRES_DB:-donna}
+    volumes:
+      - ./knowledge:/app/knowledge:ro
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    profiles: ["caddy"]
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:-localhost}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  donna-db:
+  caddy-data:
+  caddy-config:

@@ -1,0 +1,39 @@
+{
+  "profile": {
+    "name": "Alex Demo",
+    "title": "Engineering Lead · Full-Stack Engineer",
+    "summary": "Demo profile. Alex is a fictional engineering lead used to show how Donna works; replace this folder's content with your own."
+  },
+  "status": {
+    "role": "Engineering Lead",
+    "project": "Clinic Booking Platform · Northwind Health (fictional)",
+    "focus": "Leading delivery of a booking platform for clinics",
+    "availability": ["Remote", "Hybrid"]
+  },
+  "timeline": [
+    {
+      "title": "Engineering Lead · Clinic Booking Platform",
+      "organization": "Northwind Health (fictional)",
+      "start": "03/2024",
+      "end": "Present",
+      "description": "Leads a team of six building an appointment booking platform for clinics.",
+      "stack": ["Next.js", "PostgreSQL", "Docker"]
+    },
+    {
+      "title": "Senior Full-Stack Engineer · Inventory Tracker",
+      "organization": "Contoso Logistics (fictional)",
+      "start": "06/2021",
+      "end": "02/2024",
+      "description": "Built the web app and API of an inventory tracking system for warehouses.",
+      "stack": ["React", "Node.js", "PostgreSQL"]
+    },
+    {
+      "title": "Software Engineer",
+      "organization": "Fabrikam Studio (fictional)",
+      "start": "09/2018",
+      "end": "05/2021",
+      "description": "Worked on client web projects across several industries.",
+      "stack": ["JavaScript", "Python"]
+    }
+  ]
+}
