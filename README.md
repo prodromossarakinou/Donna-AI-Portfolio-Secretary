@@ -4,7 +4,11 @@ An interactive professional profile with an AI secretary. Visitors (recruiters, 
 access code, browse your portfolio and ask **Donna**, who answers only about your professional background and only
 from what you have written.
 
-Author: **Prodromos Sarakinou** · License: [MIT](LICENSE)
+[![License: MIT](https://img.shields.io/github/license/prodromossarakinou/Donna-AI-Portfolio-Secretary)](LICENSE)
+[![Open source](https://img.shields.io/badge/open%20source-yes-0d5eaf)](https://github.com/prodromossarakinou/Donna-AI-Portfolio-Secretary)
+[![Last commit](https://img.shields.io/github/last-commit/prodromossarakinou/Donna-AI-Portfolio-Secretary)](https://github.com/prodromossarakinou/Donna-AI-Portfolio-Secretary/commits/main)
+
+Author: **Prodromos Sarakinou** · License: [MIT](LICENSE) · Open source
 
 > The repository ships only demo content for a fictional person ("Alex Demo"). Your own content lives in the
 > `knowledge/` folder, which is never committed.
@@ -168,6 +172,10 @@ words, because recruiters ask "has he worked on X before?".
 
 Only the title is required. A project with no "What it is" text is treated as a draft and shown nowhere. `Order`
 sorts the cards on the Projects page.
+
+**Open-source projects**: when `Link` is a public GitHub repository, the card gets an "Open source · <license>"
+stamp with the license GitHub reports for that repository (MIT, Apache-2.0, and so on). For code hosted elsewhere,
+add a line `- License: MIT` yourself.
 
 **5. Availability** — one document. Recruiters ask this in almost every conversation.
 

@@ -45,6 +45,7 @@ export default async function ProjectsPage() {
               contributions: [],
               stack: project.stack,
               url: /^https?:\/\//.test(project.url) ? project.url : "",
+              license: project.license,
             }))}
           />
         )}

@@ -134,6 +134,7 @@ model Project {
   sortOrder     Int      @default(0)
   sourceHash    String   @default("")
   kind          String   @default("project")
+  license       String   @default("")
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Scale } from "lucide-react";
 
 export type ProjectCard = {
   id: string;
@@ -15,6 +15,7 @@ export type ProjectCard = {
   contributions: string[];
   stack: string[];
   url: string;
+  license: string;
 };
 
 export function ProjectGrid({ projects }: { projects: ProjectCard[] }) {
@@ -64,9 +65,19 @@ export function ProjectGrid({ projects }: { projects: ProjectCard[] }) {
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="flex scroll-mt-24 flex-col rounded-2xl border bg-card p-6 target:border-primary"
             >
-              {project.period && (
-                <p className="font-mono text-xs uppercase tracking-[0.15em] text-primary">{project.period}</p>
-              )}
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                {project.period ? (
+                  <p className="font-mono text-xs uppercase tracking-[0.15em] text-primary">{project.period}</p>
+                ) : (
+                  <span />
+                )}
+                {project.license && (
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-[0.1em] text-primary">
+                    <Scale className="size-3" />
+                    Open source · {project.license}
+                  </span>
+                )}
+              </div>
               <h2 className="mt-2 text-xl font-semibold leading-snug">{project.name}</h2>
               <p className="text-sm text-muted-foreground">
                 {[project.role, project.organization].filter(Boolean).join(" · ")}

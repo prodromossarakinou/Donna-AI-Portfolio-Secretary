@@ -29,6 +29,7 @@ export const PROJECT_TEMPLATE = `# Project: Name of the project
 - Role: 
 - Stack: Next.js, Spring Boot
 - Link: 
+- License: 
 - Order: 1
 
 ## What it is
@@ -90,8 +91,26 @@ function parseProject(title: string, content: string) {
       .map((item) => item.trim())
       .filter(Boolean),
     url: meta.get("link") ?? "",
+    license: meta.get("license") ?? "",
     sortOrder: Number.isFinite(order) ? Math.trunc(order) : 0,
   };
+}
+
+async function githubLicense(url: string): Promise<string> {
+  const match = /^https?:\/\/github\.com\/([\w.-]+)\/([\w.-]+?)(?:\.git)?\/?$/i.exec(url.trim());
+  if (!match) return "";
+  try {
+    const response = await fetch(`https://api.github.com/repos/${match[1]}/${match[2]}`, {
+      headers: { accept: "application/vnd.github+json", "user-agent": "donna-portfolio" },
+      signal: AbortSignal.timeout(6000),
+    });
+    if (!response.ok) return "";
+    const repo = (await response.json()) as { private?: boolean; license?: { spdx_id?: string | null } | null };
+    const spdx = repo.license?.spdx_id ?? "";
+    return repo.private || !spdx || spdx === "NOASSERTION" ? "" : spdx;
+  } catch {
+    return "";
+  }
 }
 
 function hashOf(title: string, content: string): string {
@@ -132,6 +151,7 @@ export async function syncProjectsFromDocs(force = false) {
           contributions: clean(card.contributions, 3),
           stack: [...new Set(clean(card.stack, 8).map(stripVersion))].filter(Boolean),
           url: card.url.trim() || parsed.url,
+          license: parsed.license,
           sortOrder: parsed.sortOrder,
         };
       }
@@ -139,7 +159,8 @@ export async function syncProjectsFromDocs(force = false) {
       console.error("project card extraction failed", error);
       hash = "";
     }
-    const values = { ...data, sourceHash: hash };
+    const license = (await githubLicense(data.url)) || data.license;
+    const values = { ...data, license, sourceHash: hash };
     await db.project.upsert({ where: { slug: doc.slug }, create: { slug: doc.slug, ...values }, update: values });
   }
   await db.project.deleteMany({ where: { slug: { notIn: keep } } });
