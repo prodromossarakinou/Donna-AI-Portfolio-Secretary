@@ -46,5 +46,13 @@
   },
   "author": "Prodromos Sarakinou",
   "license": "MIT",
-  "description": "Interactive professional profile with an AI secretary that answers only about your professional background."
+  "description": "Interactive professional profile with an AI secretary that answers only about your professional background.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prodromossarakinou/Donna-AI-Portfolio-Secretary.git"
+  },
+  "homepage": "https://github.com/prodromossarakinou/Donna-AI-Portfolio-Secretary#readme",
+  "bugs": {
+    "url": "https://github.com/prodromossarakinou/Donna-AI-Portfolio-Secretary/issues"
+  }
 }

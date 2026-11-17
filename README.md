@@ -33,8 +33,8 @@ You need Docker (with Compose v2), git, an Anthropic API key, an OpenAI API key 
 admin rights.
 
 ```bash
-git clone https://github.com/prodromossarakinou/donna.git
-cd donna
+git clone https://github.com/prodromossarakinou/Donna-AI-Portfolio-Secretary.git
+cd Donna-AI-Portfolio-Secretary
 ./start.sh
 ```
 
