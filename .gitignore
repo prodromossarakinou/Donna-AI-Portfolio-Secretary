@@ -66,5 +66,6 @@ next-env.d.ts
 
 # database dumps and backups
 *.sql
+!prisma/migrations/**/*.sql
 *.dump
 *.bak
