@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-: "${DEPLOY_TARGET:?Set DEPLOY_TARGET, e.g. user@server}"
-: "${DEPLOY_PATH:?Set DEPLOY_PATH, e.g. /opt/donna}"
+CONFIG="$(dirname "$0")/deploy.local"
+if [ -f "$CONFIG" ]; then
+  # shellcheck disable=SC1090
+  . "$CONFIG"
+fi
+
+: "${DEPLOY_TARGET:?Set DEPLOY_TARGET (in scripts/deploy.local or the environment), e.g. user@server}"
+: "${DEPLOY_PATH:?Set DEPLOY_PATH (in scripts/deploy.local or the environment), e.g. /opt/donna}"
 
 SSH_CMD=(ssh)
 if [ -n "${DEPLOY_KEY:-}" ]; then
@@ -19,6 +25,8 @@ rsync -az --human-readable --itemize-changes \
   --exclude '.env' \
   --exclude '.env.*' \
   --exclude '.DS_Store' \
+  --exclude 'scripts/deploy.local' \
+  --exclude '.setup-answers' \
   ./ "${DEPLOY_TARGET}:${DEPLOY_PATH}/"
 
 rsync -az --delete --human-readable --itemize-changes \

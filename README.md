@@ -292,6 +292,9 @@ The database lives in a Docker volume named `<folder>_donna-db`, after the folde
 DEPLOY_TARGET=user@server DEPLOY_PATH=/opt/donna ./scripts/deploy.sh
 ```
 
+To avoid typing them each time, put `DEPLOY_TARGET`, `DEPLOY_PATH` and optionally `DEPLOY_KEY` (an SSH identity
+file) in `scripts/deploy.local`, one `NAME=value` per line. That file is ignored by git.
+
 It never sends `.env` and never touches the database; the app applies new migrations itself on start.
 
 ## License
