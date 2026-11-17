@@ -273,7 +273,8 @@ Without a proxy of your own, add the bundled Caddy (ports 80/443, automatic TLS)
 docker compose --profile prod --profile caddy up -d --build
 ```
 
-The database lives in the `donna_donna-db` volume. For updates over rsync there is `scripts/deploy.sh`:
+The database lives in a Docker volume named `<folder>_donna-db`, after the folder the project is in (set
+`COMPOSE_PROJECT_NAME` in `.env` to choose the name yourself), so two copies in different folders never share data. For updates over rsync there is `scripts/deploy.sh`:
 
 ```bash
 DEPLOY_TARGET=user@server DEPLOY_PATH=/opt/donna ./scripts/deploy.sh
