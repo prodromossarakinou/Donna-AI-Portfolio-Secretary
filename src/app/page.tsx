@@ -23,7 +23,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         .filter(Boolean);
   return (
     <>
-      <SiteHeader name={data.profile.name} active="home" />
+      <SiteHeader name={data.profile.name} active="home" feedbackHref={`/feedback/${visitor.link.code}`} />
       <Landing
         name={data.profile.name}
         firstName={ownerFrom(data.profile.name).first}

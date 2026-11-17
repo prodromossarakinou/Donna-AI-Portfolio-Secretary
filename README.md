@@ -225,6 +225,17 @@ See [`knowledge.example/`](knowledge.example) for a complete, working set.
 Write professional facts, and only the personal ones you really want shown. No internal company matters,
 evaluations or salaries. Donna never states technology version numbers, whatever the documents contain.
 
+## Feedback
+
+Every access link has a feedback page at `/feedback/<code>` that **never expires**: it keeps working after the
+access code itself has expired, and stops only if you revoke or delete the link. Visitors also see a "Feedback"
+link in the header while they browse. Copy the link from **Admin → Access links** to send it yourself.
+
+The form asks four required questions (overall usefulness 1–5, ease of finding things 1–5, whether Donna answered,
+whether it was enough to decide to make contact) and four optional ones (what was missing, what to change, name or
+role, email). **Admin → Feedback** shows the averages and every response, labelled with the company of the link it
+came from.
+
 ## What is stored
 
 Questions and answers, the IP address and browser on each entry, and one essential sign-in cookie. The text of

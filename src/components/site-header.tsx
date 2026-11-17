@@ -7,7 +7,15 @@ const LINKS = [
   { href: "/projects", label: "Projects", key: "projects" },
 ] as const;
 
-export function SiteHeader({ name, active }: { name: string; active: "home" | "portfolio" | "projects" }) {
+export function SiteHeader({
+  name,
+  active,
+  feedbackHref,
+}: {
+  name: string;
+  active: "home" | "portfolio" | "projects";
+  feedbackHref?: string;
+}) {
   return (
     <header className="sticky top-0 z-30 border-b bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-5">
@@ -29,6 +37,11 @@ export function SiteHeader({ name, active }: { name: string; active: "home" | "p
               {link.label}
             </Link>
           ))}
+          {feedbackHref && (
+            <Link href={feedbackHref} className="rounded-full px-3.5 py-1.5 text-sm text-muted-foreground hover:text-foreground">
+              Feedback
+            </Link>
+          )}
         </nav>
         <ThemeToggle />
       </div>

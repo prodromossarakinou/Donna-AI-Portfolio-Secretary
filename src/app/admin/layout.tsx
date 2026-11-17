@@ -11,6 +11,7 @@ const NAV = [
   { href: "/admin/projects", label: "Projects" },
   { href: "/admin/knowledge", label: "Knowledge" },
   { href: "/admin/timeline", label: "Timeline" },
+  { href: "/admin/feedback", label: "Feedback" },
   { href: "/admin/sandbox", label: "Test Donna" },
   { href: "/admin/gaps", label: "Knowledge gaps" },
   { href: "/admin/settings", label: "Limits" },

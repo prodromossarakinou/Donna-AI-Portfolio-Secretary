@@ -2,6 +2,7 @@ import Link from "next/link";
 import { requireAdmin } from "@/lib/admin";
 import { linkStatus, shareUrl } from "@/lib/codes";
 import { db } from "@/lib/db";
+import { feedbackUrl } from "@/lib/feedback";
 import { formatDate } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -18,7 +19,7 @@ export default async function LinksPage() {
     <div className="space-y-8">
       <header>
         <h1 className="text-2xl font-semibold">Access links</h1>
-        <p className="text-sm text-muted-foreground">One code per company. Share the URL or the plain code.</p>
+        <p className="text-sm text-muted-foreground">One code per company. Share the URL or the plain code. The Feedback link of each code never expires.</p>
       </header>
       <CreateLinkForm />
       <div className="rounded-xl border overflow-x-auto">
@@ -58,6 +59,7 @@ export default async function LinksPage() {
                     <div className="flex items-center gap-2">
                       <code className="font-mono text-xs">{link.code}</code>
                       <CopyButton value={shareUrl(link.code)} label="URL" />
+                      <CopyButton value={feedbackUrl(link.code)} label="Feedback" />
                     </div>
                   </TableCell>
                   <TableCell>

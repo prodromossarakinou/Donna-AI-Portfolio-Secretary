@@ -20,7 +20,7 @@ export default async function ProjectsPage() {
   const owner = ownerFrom(data.profile.name);
   return (
     <>
-      <SiteHeader name={data.profile.name} active="projects" />
+      <SiteHeader name={data.profile.name} active="projects" feedbackHref={`/feedback/${visitor.link.code}`} />
       <main className="mx-auto max-w-5xl px-5 pb-40">
         <section className="space-y-4 pt-16 pb-12 md:pt-24">
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">Projects</p>

@@ -18,7 +18,7 @@ export default async function ProfilePage() {
   const [data, education, steps] = await Promise.all([getProfileData(), getEducation(), getTimelineSteps()]);
   return (
     <>
-      <SiteHeader name={data.profile.name} active="portfolio" />
+      <SiteHeader name={data.profile.name} active="portfolio" feedbackHref={`/feedback/${visitor.link.code}`} />
       <main className="mx-auto max-w-5xl px-5">
         <Hero data={data} />
         <Timeline steps={steps} />

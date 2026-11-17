@@ -33,6 +33,7 @@ Donna is an AI. Her answers are generated automatically from material ${first} w
 - The access code you used and the times you visited.
 - Your IP address and browser type, recorded when you enter the code.
 - The questions you type and Donna's answers.
+- The answers you choose to give in the feedback form, with your name and email only if you enter them.
 - One cookie that keeps you signed in. It is required for the site to work and expires together with your access code. There are no analytics, advertising or tracking cookies.
 
 ## Why
@@ -72,6 +73,7 @@ You can ask for a copy of your data, ask for it to be corrected or deleted, or o
 - Ο κωδικός πρόσβασης που χρησιμοποιήσατε και οι ώρες των επισκέψεών σας.
 - Η διεύθυνση IP και ο τύπος του browser σας, όταν εισάγετε τον κωδικό.
 - Οι ερωτήσεις που γράφετε και οι απαντήσεις της Donna.
+- Οι απαντήσεις που επιλέγετε να δώσετε στη φόρμα αξιολόγησης, με όνομα και email μόνο αν τα συμπληρώσετε.
 - Ένα cookie που σας κρατά συνδεδεμένους. Είναι απαραίτητο για τη λειτουργία της σελίδας και λήγει μαζί με τον κωδικό σας. Δεν υπάρχουν cookies στατιστικών, διαφήμισης ή παρακολούθησης.
 
 ## Γιατί
