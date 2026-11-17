@@ -47,6 +47,10 @@ That is the whole installation. On the first run `start.sh`:
 4. Copies the demo content to `knowledge/` if that folder does not exist.
 5. Builds and starts the database and the app, and prints the URL.
 
+If the setup is interrupted, run `./start.sh` again: the non-sensitive answers (URL, name, email, Keycloak issuer,
+client ID, role) are remembered in `.setup-answers` and offered as defaults, so you only press Enter. API keys and
+the client secret are never saved there and are always asked again.
+
 On later runs the same command just rebuilds and starts. To update, `git pull` and run `./start.sh` again; your
 `.env`, your `knowledge/` folder and the database are left as they are.
 

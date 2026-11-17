@@ -53,6 +53,10 @@ next-env.d.ts
 /public/android-chrome-512x512.png
 /public/site.webmanifest
 
+# answers remembered by start.sh between runs (no secrets)
+.setup-answers
+.setup-answers.tmp
+
 # local tooling and editors
 .claude/
 .idea/
